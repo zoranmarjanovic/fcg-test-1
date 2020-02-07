@@ -3,9 +3,10 @@ import { useDispatch } from "react-redux";
 
 import Header from "../../Components/Header";
 import CarInformation from "../CarInformation";
+import CarFinancialForm from "../CarFinancialForm";
 import { fetchCarInfo } from "../../Store/Operations/carOperations";
 
-import "./style";
+import { FormTaskLayer } from "./style";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,6 +19,9 @@ function App() {
     <>
       <Header title={"FCG coding challenge"} />
       <CarInformation />
+      <FormTaskLayer>
+        <CarFinancialForm />
+      </FormTaskLayer>
     </>
   );
 }
