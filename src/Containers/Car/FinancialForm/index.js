@@ -53,27 +53,25 @@ function CarFinancialForm() {
   };
 
   return (
-    <>
-      <FormLayout onSubmit={submitForm}>
-        <h4>A form to add information</h4>
-        {FormDropDown.map(({ title, key, placeholder }) => (
-          <Information key={key}>
-            <h6>{title}</h6>
-            <InputDropDown
-              onChange={e => {
-                // try to normalize the data
-                formHandler(e, key);
-              }}
-              defaultOption={modifiedCarInfo[key]}
-              options={formData[key]}
-              placeholder={`Select ${placeholder}`}
-            />
-          </Information>
-        ))}
-        {/* Move button later if its used by other component */}
-        <Button>Submit</Button>
-      </FormLayout>
-    </>
+    <FormLayout onSubmit={submitForm}>
+      <h4>A form to add information</h4>
+      {FormDropDown.map(({ title, key, placeholder }) => (
+        <Information key={key}>
+          <h6>{title}</h6>
+          <InputDropDown
+            onChange={e => {
+              // try to normalize the data
+              formHandler(e, key);
+            }}
+            defaultOption={modifiedCarInfo[key]}
+            options={formData[key]}
+            placeholder={`Select ${placeholder}`}
+          />
+        </Information>
+      ))}
+      {/* Move button later if its used by other component */}
+      <Button>Submit</Button>
+    </FormLayout>
   );
 }
 

@@ -4,7 +4,7 @@ import {
   FETCH_CAR_INFO_ERROR
 } from "../Constants";
 
-import { carInfoModel } from "../../Containers/CarInformation/model";
+import { carInfoModel } from "../../Containers/Car/Information/model";
 
 const carReducer = (state = carInfoModel, action) => {
   switch (action.type) {

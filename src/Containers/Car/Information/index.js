@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
-import FinancialInformation from "../../Components/FinancialInformation";
-import InputDropDown from "../../Components/Input/DropDown";
-import { updateCarData } from "../../Store/Operations/carOperations";
+import FinancialInformation from "../../../Components/FinancialInformation";
+import InputDropDown from "../../../Components/Input/DropDown";
+import { updateCarData } from "../../../Store/Operations/carOperations";
 import { StatusDropDown } from "./model";
 
 import {
