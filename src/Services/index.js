@@ -5,10 +5,15 @@ import {
   queryMakeInfo,
   queryModelInfo,
   queryTrimInfo,
-  queryEngineInfo
+  queryEngineInfo,
+  queryTasks
 } from "./GraphqlInterface/queries";
 
-import { mutateCarInfo } from "./GraphqlInterface/mutation";
+import {
+  mutateCarInfo,
+  createCarTask,
+  updateCarTask
+} from "./GraphqlInterface/mutation";
 
 export {
   queryCarInfo,
@@ -17,5 +22,8 @@ export {
   queryMakeInfo,
   queryModelInfo,
   queryTrimInfo,
-  queryEngineInfo
+  queryEngineInfo,
+  queryTasks,
+  createCarTask,
+  updateCarTask
 };

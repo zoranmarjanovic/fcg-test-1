@@ -1,18 +1,19 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { updateCarData } from "../../../Store/Operations/carOperations";
 
 import InputDropDown from "../../../Components/Input/DropDown";
 import { FormDropDown, dataForForm } from "./model";
+
+import { updateCarData } from "../../../Store/Operations/carOperations";
 import {
   fetchMakeValues,
   fetchModelValues,
   fetchTrimValues
 } from "../../../Services/formOperation";
 
-import { FormLayout, Information, Button } from "./style";
+import { Information, Button, FormLayout } from "./style";
 
-function CarFinancialForm() {
+function FinancialForm() {
   const dispatch = useDispatch();
   const { carInfo } = useSelector(state => state);
   const [formData, setFormData] = useState(dataForForm);
@@ -75,4 +76,4 @@ function CarFinancialForm() {
   );
 }
 
-export default CarFinancialForm;
+export default FinancialForm;

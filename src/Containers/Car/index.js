@@ -2,10 +2,12 @@ import React, { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 import CarInformation from "./Information";
-import CarFinancialForm from "./FinancialForm";
+import FinancialForm from "./FinancialForm";
+import Tasks from "./Tasks";
+
 import { fetchCarInfo } from "../../Store/Operations/carOperations";
 
-import { FormTaskLayer } from "./style";
+import { FormTaskLayer, FormLayout } from "./style";
 
 function Car() {
   const dispatch = useDispatch();
@@ -18,7 +20,8 @@ function Car() {
     <>
       <CarInformation />
       <FormTaskLayer>
-        <CarFinancialForm />
+        <FinancialForm />
+        <Tasks />
       </FormTaskLayer>
     </>
   );

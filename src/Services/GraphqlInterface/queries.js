@@ -1,5 +1,6 @@
 import graphQlTag from "graphql-tag";
 import { carInfoQueryParams } from "./model";
+import { carId } from "../../config";
 
 // Same a Query as from model.
 export const queryCarInfo = carInfoId => ({
@@ -55,5 +56,21 @@ export const queryEngineInfo = (make, model, trim) => ({
     make,
     model,
     trim
+  }
+});
+
+export const queryTasks = () => ({
+  query: graphQlTag`
+    query tasks($carId: ID!) {
+      tasks(carId: $carId) {
+        id
+        taskType
+        comment
+        completed
+      }
+    }
+  `,
+  variables: {
+    carId
   }
 });

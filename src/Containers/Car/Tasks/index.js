@@ -1,100 +1,74 @@
 import React, { useState, useEffect } from "react";
-import InputCheckBox from "../../Components/CheckBox";
-import InputDropDown from "../../Components/DropDown";
-import Modal from "../../Components/Modal";
+import CreateTask from "./CreateTask";
+import InputCheckBox from "../../../Components/Input/CheckBox";
+
 import {
   fetchCarTasks,
-  createTaskAction,
+  createTask,
   updateCarTasks
-} from "../../Store/operations/carTasksOperations";
-import { useSelector, useDispatch } from "react-redux";
+} from "../../../Services/tasksOperation";
 
-import {
-  InformationLayout,
-  ImageHolder,
-  InformationHolder,
-  Information,
-  MainHeading
-} from "./style";
+import { Information, Button, FormLayout, TaskList, TaskAction } from "./style";
 
-import { taskOptions, taskList } from "../../Models";
+// import { taskOptions, taskList } from "../../Models";
+export const taskOptions = [
+  { value: "ADD_DOCUMENT", label: "Add Commnet" },
+  { value: "WASH_CAR", label: "Wash Car" },
+  { value: "ADD_PAYMENT_DETAILS", label: "Add payment Details" }
+];
 
-function CarTasks() {
-  const [isShowing, setIsShowing] = useState(false);
-  const [taskName, setTaskName] = useState(null);
-  const [taskCommment, setTaskCommment] = useState("");
+function CarTask() {
+  const [tasks, setTasks] = useState([]);
+  const [modalStatus, setModalStatus] = useState(false);
 
-  const { carTasks } = useSelector(state => state);
-  const dispatch = useDispatch();
-
-  const setTask = e => {
-    setTaskName(e.value);
-  };
-
-  const setTaskComment = e => {
-    setTaskCommment(e.target.value);
-  };
-
-  const createTask = () => {
-    createTaskAction(
-      "",
-      { taskType: taskName, comment: taskCommment },
-      dispatch
-    );
+  const addTask = (taskType, comment) => {
+    createTask({ taskType, comment });
   };
 
   useEffect(() => {
-    fetchCarTasks(dispatch);
+    initiateToFetchCarTasks();
   }, []);
 
-  const onChangeTask = (e, id) => {
-    updateCarTasks(id, e.target.checked, dispatch);
-  };
-  const addTask = e => {
-    console.log(e);
-    console.log(createTaskAction);
-  };
-  const toggleModel = () => {
-    setIsShowing(!isShowing);
+  const initiateToFetchCarTasks = async () => {
+    const { tasks } = await fetchCarTasks();
+    setTasks(tasks);
   };
 
+  const onChangeTask = (id, checkBoxValue) => {
+    updateCarTasks(id, checkBoxValue);
+  };
+
+  const toggleModal = e => {
+    e.preventDefault();
+    setModalStatus(!modalStatus);
+  };
+  // createTask
   return (
-    <>
+    <FormLayout>
+      <h4>A List of tasks</h4>
       <div>
-        {carTasks.map(({ comment, completed, id, taskType }) => (
-          <div key={id}>
-            {taskType}: {comment} :
-            <InputCheckBox
-              checked={completed}
-              onChange={e => {
-                onChangeTask(e, id);
-              }}
-              labelName={"test"}
-            />
-          </div>
-        ))}
-        <button onClick={toggleModel}>Show modal</button>
+        {tasks &&
+          tasks.map(({ comment, completed, id, taskType }) => (
+            <TaskList key={id}>
+              {taskType}: {comment}
+              <InputCheckBox
+                id={id}
+                checked={completed}
+                onChange={onChangeTask}
+              />
+            </TaskList>
+          ))}
+        {!tasks || (!tasks.length && <div>Opps No task</div>)}
+        <TaskAction onClick={toggleModal}>+</TaskAction>
       </div>
-      <Modal isShowing={isShowing} hide={toggleModel}>
-        <div>
-          Modal
-          <label>
-            Task type
-            <InputDropDown
-              options={taskOptions}
-              onChange={setTask}
-              placeholder="Select an option"
-            />
-          </label>
-          <label>
-            Task comment
-            <input type="text" onChange={setTaskComment} />
-          </label>
-          <button onClick={createTask}>Add</button>
-        </div>
-      </Modal>
-    </>
+      <CreateTask
+        modalStatus={modalStatus}
+        toggleModal={toggleModal}
+        createTask={addTask}
+        taskOptions={taskOptions}
+      />
+    </FormLayout>
   );
 }
 
-export default CarTasks;
+export default CarTask;
