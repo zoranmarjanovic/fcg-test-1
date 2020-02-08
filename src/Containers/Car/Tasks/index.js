@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import CreateTask from "./CreateTask";
 import InputCheckBox from "../../../Components/Input/CheckBox";
+import { PaperClip, CarWash, Payment } from "../../../Components/Icons";
 
 import {
   fetchCarTasks,
@@ -8,7 +9,13 @@ import {
   updateCarTasks
 } from "../../../Services/tasksOperation";
 
-import { Information, Button, FormLayout, TaskList, TaskAction } from "./style";
+import {
+  Information,
+  TaskIconHolder,
+  FormLayout,
+  TaskList,
+  TaskAction
+} from "./style";
 
 // import { taskOptions, taskList } from "../../Models";
 export const taskOptions = [
@@ -16,6 +23,17 @@ export const taskOptions = [
   { value: "WASH_CAR", label: "Wash Car" },
   { value: "ADD_PAYMENT_DETAILS", label: "Add payment Details" }
 ];
+
+const TaskIcons = ({ iconName }) => {
+  if (iconName === "ADD_DOCUMENT") {
+    return <PaperClip />;
+  } else if (iconName === "WASH_CAR") {
+    return <CarWash />;
+  } else if (iconName === "ADD_PAYMENT_DETAILS") {
+    return <Payment />;
+  }
+  return null;
+};
 
 function CarTask() {
   const [tasks, setTasks] = useState([]);
@@ -50,7 +68,13 @@ function CarTask() {
         {tasks &&
           tasks.map(({ comment, completed, id, taskType }) => (
             <TaskList key={id}>
-              {taskType}: {comment}
+              <div>
+                <TaskIconHolder>
+                  {" "}
+                  <TaskIcons iconName={taskType} />
+                </TaskIconHolder>
+                <span>{comment}</span>
+              </div>
               <InputCheckBox
                 id={id}
                 checked={completed}
