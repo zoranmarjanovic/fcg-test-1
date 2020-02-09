@@ -1,14 +1,15 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Select from "react-select";
 
-const InputDropdown = ({
-  value = [],
-  onChange,
-  placeholder,
-  id,
-  name,
-  options
-}) => {
+const InputDropdown = ({ value, onChange, placeholder, id, name, options }) => {
+  const [inputValue, setInputValue] = useState(value);
+
+  useEffect(() => {
+    if (!value) {
+      setInputValue(null);
+    }
+  }, [value]);
+
   const normalizeData = options => {
     const constructedData = [];
     if (!options || !options.length) {
@@ -31,9 +32,10 @@ const InputDropdown = ({
   };
 
   const onChangeHandler = e => {
-    if (e.value && onChange) {
+    if (onChange) {
       onChange(e, id);
     }
+    setInputValue({ label: e.label, value: e.value });
   };
 
   return (
@@ -41,9 +43,9 @@ const InputDropdown = ({
       options={normalizeData(options)}
       name={name}
       key={id}
-      isDisabled={!options.length}
+      isDisabled={!options || !options.length}
       onChange={onChangeHandler}
-      value={value}
+      value={inputValue}
       placeholder={placeholder}
     />
   );

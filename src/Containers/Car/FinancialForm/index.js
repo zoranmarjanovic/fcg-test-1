@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import InputDropDown from "../../../Components/Input/DropDown";
-import { FormDropDown, dataForForm } from "./model";
+import { FormDropDown } from "./model";
 
 import { updateCarData } from "../../../Store/Operations/carOperations";
 import {
@@ -16,21 +16,19 @@ import { Information, Button, FormLayout } from "./style";
 function FinancialForm() {
   const dispatch = useDispatch();
   const { carInfo } = useSelector(state => state);
-  const [formData, setFormData] = useState({ ...dataForForm });
   const [formVisibility, setFormVisibility] = useState(false);
-
-  useEffect(() => {
-    initiateFetchMakeData();
-  }, []);
+  const [customCarInfo, setCustomCarInfo] = useState();
 
   useEffect(() => {
     const { make, model, id } = carInfo;
     if (id && !formVisibility) {
+      setCustomCarInfo(carInfo);
+      initiateFetchMakeData();
       // Only loading the options once at page load
-      if (make && make !== formData["make"]) {
+      if (make) {
         initiateFetchModelData(make);
       }
-      if (make && model && model !== formData["model"]) {
+      if (make && model) {
         initiateFetchTrimData(make, model);
       }
     }
@@ -41,11 +39,6 @@ function FinancialForm() {
     if (!formVisibility && id && (make.length || model.length || trim.length)) {
       // carInfo exist with other informations
       setFormVisibility(true);
-      setData({
-        makeDefaultValue: make ? { label: make, value: make } : null,
-        modelDefaultValue: model ? { label: model, value: model } : null,
-        trimDefaultValue: trim ? { label: trim, value: trim } : null
-      });
     } else if (id) {
       // carInfo exist
       setFormVisibility(true);
@@ -54,57 +47,70 @@ function FinancialForm() {
 
   const setData = response => {
     // Setting the form in async way and with in callback
-    setFormData(formData => ({ ...formData, ...response }));
-  };
-
-  const resetForm = data => {
-    setFormData({ ...dataForForm, ...data });
+    setCustomCarInfo(formData => ({ ...formData, ...response }));
   };
 
   const formHandler = ({ value }, key) => {
     if (key === "make") {
       initiateFetchModelData(value);
-      resetForm({
-        // we can automate reset function, for now I am keeping it like this
-        make: formData["make"],
-        makeDefaultValue: { label: value, value: value }
+      setData({
+        // we can improve this function by supplying building more dynamic
+        make: {
+          label: value,
+          value: value
+        },
+        model: null,
+        trim: null
       });
     } else if (key === "model") {
-      initiateFetchTrimData(formData["makeDefaultValue"]["value"], value);
-      resetForm({
-        make: formData["make"],
-        makeDefaultValue: formData["make" + "DefaultValue"],
-        model: formData["model"],
-        modelDefaultValue: { label: value, value: value }
+      initiateFetchTrimData(customCarInfo["make"], value);
+      setData({
+        make: customCarInfo["make"],
+        model: {
+          label: value,
+          value: value
+        },
+        trim: null
       });
     } else if (key === "trim") {
-      resetForm({
-        make: formData["make"],
-        makeDefaultValue: formData["make" + "DefaultValue"],
-        model: formData["model"],
-        modelDefaultValue: formData["model" + "DefaultValue"],
-        trim: formData["trim"],
-        trimDefaultValue: { label: value, value: value }
+      setData({
+        make: customCarInfo["make"],
+        model: customCarInfo["model"],
+        trim: {
+          label: value,
+          value: value
+        }
       });
     } // Skipping engine update for now
   };
 
   const initiateFetchMakeData = async () => {
-    setData(await fetchMakeValues());
+    const response = await fetchMakeValues();
+    const { make } = response;
+    setData({ makeOptions: make });
   };
 
   const initiateFetchModelData = async value => {
-    setData(await fetchModelValues(value));
+    const response = await fetchModelValues(value);
+    const { model } = response;
+    setData({ modelOptions: model });
   };
 
   const initiateFetchTrimData = async (make, value) => {
-    setData(await fetchTrimValues({ make, value }));
+    debugger;
+    const response = await fetchTrimValues(make, value);
+    if (!response) {
+      return;
+    }
+    const { trim } = response;
+
+    setData({ trimOptions: trim });
   };
 
   const submitForm = e => {
     e.preventDefault();
     // Skipping engine update for now
-    const { make, model, trim } = e.target;
+    const { make, model, trim } = customCarInfo;
     updateCarData(
       {
         make: (make && make.value) || "",
@@ -120,6 +126,13 @@ function FinancialForm() {
       <h4>A form to add information</h4>
       {formVisibility &&
         FormDropDown.map(({ title, key, placeholder }) => {
+          const val = customCarInfo[key];
+          const valueToPass = val
+            ? {
+                label: val,
+                value: val
+              }
+            : null;
           return (
             <Information key={key}>
               <h6>{title}</h6>
@@ -127,8 +140,8 @@ function FinancialForm() {
                 onChange={formHandler}
                 id={key}
                 name={key}
-                value={formData[key + "DefaultValue"]}
-                options={formData[key]}
+                value={valueToPass}
+                options={customCarInfo[key + "Options"]}
                 placeholder={`Select ${placeholder}`}
               />
             </Information>

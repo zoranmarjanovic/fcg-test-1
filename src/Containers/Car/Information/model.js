@@ -43,6 +43,23 @@ export const StatusDropDown = [
   }
 ];
 
+export const CarNameMap = {
+  AT_OWNER: "At owner",
+  AT_BUYER: "At buyer",
+  AT_OUR_LOCATION: "At our location",
+  OWNER: "Owner",
+  US: "Us",
+  BUYER: "Buyer",
+  AVAILABLE: "Available",
+  PENDING: "Pending",
+  SOLD: "Sold",
+  RESERVED: "Reserved",
+  VEE: "Vee",
+  INLINE: "Inline",
+  BOXER: "Boxer",
+  ROTARY: "Rotary"
+};
+
 export const carInfoModel = {
   id: "",
   make: "",

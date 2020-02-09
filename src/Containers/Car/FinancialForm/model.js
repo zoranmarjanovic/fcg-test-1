@@ -24,14 +24,3 @@ export const FormDropDown = [
   //   placeholder: "engine type"
   // }
 ];
-
-export const dataForForm = {
-  make: [],
-  model: [],
-  trim: [],
-  // engineType: [],
-  makeDefaultValue: null,
-  modelDefaultValue: null,
-  trimDefaultValue: null
-  // engineTypeDefaultValue: null
-};

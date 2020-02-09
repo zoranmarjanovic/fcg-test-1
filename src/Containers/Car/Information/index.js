@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FinancialInformation from "../../../Components/FinancialInformation";
 import InputDropDown from "../../../Components/Input/DropDown";
 import { updateCarData } from "../../../Store/Operations/carOperations";
-import { StatusDropDown } from "./model";
+import { StatusDropDown, CarNameMap } from "./model";
 
 import {
   InformationLayout,
@@ -40,24 +40,29 @@ function CarInformation() {
       <ImageHolder>
         <img srcSet="/car_image.jpg" alt="car" />
       </ImageHolder>
-
-      {/* Car Status Information */}
-      <InformationHolder>
-        <h4>Status</h4>
-        {StatusDropDown.map(({ options, title, key }) => (
-          <Information key={key}>
-            <h6>{title}</h6>
-            <InputDropDown
-              onChange={e => {
-                dropdownChangeHandler(e, key);
-              }}
-              defaultOption={carInfo[key]}
-              options={options}
-              placeholder={`Select ${title}`}
-            />
-          </Information>
-        ))}
-      </InformationHolder>
+      {carInfo.id && (
+        <InformationHolder>
+          <h4>Status</h4>
+          {StatusDropDown.map(({ options, title, key }) => {
+            const inputValue = {
+              label: CarNameMap[carInfo[key]],
+              value: carInfo[key]
+            };
+            return (
+              <Information key={key}>
+                <h6>{title}</h6>
+                <InputDropDown
+                  id={key}
+                  onChange={dropdownChangeHandler}
+                  value={inputValue}
+                  options={options}
+                  placeholder={`Select ${title}`}
+                />
+              </Information>
+            );
+          })}
+        </InformationHolder>
+      )}
 
       {/* Car Financial Information */}
       <InformationHolder>

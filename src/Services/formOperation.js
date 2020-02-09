@@ -39,12 +39,10 @@ export async function fetchModelValues(param) {
   }
 }
 
-export async function fetchTrimValues({ make, value }) {
+export async function fetchTrimValues(make, model) {
   try {
     // check the data status code
-    const response = await apolloClient().query(
-      queryTrimInfo({ make, model: value })
-    );
+    const response = await apolloClient().query(queryTrimInfo({ make, model }));
     // We can make better error response here
     if (response && response.data) {
       return response.data;
