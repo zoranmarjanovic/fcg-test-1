@@ -24,19 +24,30 @@ function FinancialForm() {
   }, []);
 
   useEffect(() => {
-    const { make, model, trim, id } = carInfo;
-    if (id) {
-      if (make) {
+    const { make, model, id } = carInfo;
+    if (id && !formVisibility) {
+      // Only loading the options once at page load
+      if (make && make !== formData["make"]) {
         initiateFetchModelData(make);
       }
-      if (make && model) {
+      if (make && model && model !== formData["model"]) {
         initiateFetchTrimData(make, model);
       }
+    }
+  }, [carInfo]);
+
+  useEffect(() => {
+    const { make, model, trim, id } = carInfo;
+    if (!formVisibility && id && (make.length || model.length || trim.length)) {
+      // carInfo exist with other informations
+      setFormVisibility(true);
       setData({
         makeDefaultValue: make ? { label: make, value: make } : null,
         modelDefaultValue: model ? { label: model, value: model } : null,
         trimDefaultValue: trim ? { label: trim, value: trim } : null
       });
+    } else if (id) {
+      // carInfo exist
       setFormVisibility(true);
     }
   }, [carInfo]);
@@ -50,7 +61,7 @@ function FinancialForm() {
     setFormData({ ...dataForForm, ...data });
   };
 
-  const formHandler = (value, key) => {
+  const formHandler = ({ value }, key) => {
     if (key === "make") {
       initiateFetchModelData(value);
       resetForm({
@@ -65,6 +76,15 @@ function FinancialForm() {
         makeDefaultValue: formData["make" + "DefaultValue"],
         model: formData["model"],
         modelDefaultValue: { label: value, value: value }
+      });
+    } else if (key === "trim") {
+      resetForm({
+        make: formData["make"],
+        makeDefaultValue: formData["make" + "DefaultValue"],
+        model: formData["model"],
+        modelDefaultValue: formData["model" + "DefaultValue"],
+        trim: formData["trim"],
+        trimDefaultValue: { label: value, value: value }
       });
     } // Skipping engine update for now
   };
@@ -86,7 +106,11 @@ function FinancialForm() {
     // Skipping engine update for now
     const { make, model, trim } = e.target;
     updateCarData(
-      { make: make.value, model: model.value, trim: trim.value },
+      {
+        make: (make && make.value) || "",
+        model: (model && model.value) || "",
+        trim: (trim && trim.value) || ""
+      },
       dispatch
     );
   };
@@ -103,7 +127,7 @@ function FinancialForm() {
                 onChange={formHandler}
                 id={key}
                 name={key}
-                defaultValue={formData[key + "DefaultValue"]}
+                value={formData[key + "DefaultValue"]}
                 options={formData[key]}
                 placeholder={`Select ${placeholder}`}
               />

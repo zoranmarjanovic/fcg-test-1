@@ -1,21 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import Select from "react-select";
 
 const InputDropdown = ({
-  defaultValue = [],
+  value = [],
   onChange,
   placeholder,
   id,
   name,
   options
 }) => {
-  const [value, setValue] = useState(defaultValue);
-  useEffect(() => {
-    if (!defaultValue) {
-      setValue(() => null);
-    }
-  }, [defaultValue]);
-
   const normalizeData = options => {
     const constructedData = [];
     if (!options || !options.length) {
@@ -36,10 +29,10 @@ const InputDropdown = ({
     }
     return options;
   };
+
   const onChangeHandler = e => {
-    setValue({ label: e.value, value: e.value });
     if (e.value && onChange) {
-      onChange(e.value, id);
+      onChange(e, id);
     }
   };
 
@@ -48,6 +41,7 @@ const InputDropdown = ({
       options={normalizeData(options)}
       name={name}
       key={id}
+      isDisabled={!options.length}
       onChange={onChangeHandler}
       value={value}
       placeholder={placeholder}

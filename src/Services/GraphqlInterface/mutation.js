@@ -2,14 +2,6 @@ import graphQlTag from "graphql-tag";
 import { carId } from "../../config";
 import { carInfoQueryParams } from "./model";
 
-const setNullFields = values => {
-  const obj = {};
-  Object.entries(values).forEach(([key, value]) => {
-    obj[key] = value === "" ? null : value;
-  });
-  return obj;
-};
-
 export const mutateCarInfo = carInput => ({
   mutation: graphQlTag`
       mutation updateCar($car: CarInput) {
@@ -24,7 +16,6 @@ export const mutateCarInfo = carInput => ({
 });
 
 export const createCarTask = task => {
-  console.log(task);
   return {
     mutation: graphQlTag`
       mutation createTask($carId: ID!, $task: TaskInput!) {

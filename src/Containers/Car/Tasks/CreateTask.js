@@ -7,12 +7,13 @@ import Modal from "../../../Components/Modal";
 import { InputHolder, TaskType, AddButton } from "./style";
 
 export const taskOptions = [
-  { value: "ADD_DOCUMENT", label: "Add Commnet" },
+  { value: "ADD_DOCUMENT", label: "Add Comment" },
   { value: "WASH_CAR", label: "Wash Car" },
   { value: "ADD_PAYMENT_DETAILS", label: "Add payment Details" }
 ];
 
 function CreateCarTask({ modalStatus, toggleModal, createTask }) {
+  const [taskType, setTaskType] = useState(null);
   const addTask = e => {
     e.preventDefault();
     const { comment, taskType } = e.target;
@@ -20,6 +21,10 @@ function CreateCarTask({ modalStatus, toggleModal, createTask }) {
       return;
     }
     createTask({ taskType: taskType.value, comment: comment.value });
+  };
+
+  const changeTaskType = ({ value, label }) => {
+    setTaskType({ label, value });
   };
 
   return (
@@ -30,6 +35,8 @@ function CreateCarTask({ modalStatus, toggleModal, createTask }) {
           <TaskType>Task type</TaskType>
           <InputDropDown
             name="taskType"
+            value={taskType}
+            onChange={changeTaskType}
             options={taskOptions}
             placeholder="Select an option"
           />
