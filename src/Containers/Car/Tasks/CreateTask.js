@@ -3,14 +3,8 @@ import React, { useState } from "react";
 import InputDropDown from "../../../Components/Input/DropDown";
 import InputTextArea from "../../../Components/Input/TextArea";
 import Modal from "../../../Components/Modal";
-
+import { TASK_OPTIONS } from "./constants";
 import { InputHolder, TaskType, AddButton } from "./style";
-
-export const taskOptions = [
-  { value: "ADD_DOCUMENT", label: "Add Comment" },
-  { value: "WASH_CAR", label: "Wash Car" },
-  { value: "ADD_PAYMENT_DETAILS", label: "Add payment Details" }
-];
 
 function CreateCarTask({ modalStatus, toggleModal, createTask, loading }) {
   const [taskType, setTaskType] = useState(null);
@@ -37,7 +31,7 @@ function CreateCarTask({ modalStatus, toggleModal, createTask, loading }) {
             name="taskType"
             value={taskType}
             onChange={changeTaskType}
-            options={taskOptions}
+            options={TASK_OPTIONS}
             placeholder="Select an option"
           />
         </label>

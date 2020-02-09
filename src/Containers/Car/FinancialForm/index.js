@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 
 import InputDropDown from "../../../Components/Input/DropDown";
-import { FormDropDown } from "./model";
+import { FORM_DROP_DOWN } from "./contants";
 
 import { updateCarData } from "../../../Store/Operations/carOperations";
 import {
@@ -118,7 +118,7 @@ function FinancialForm() {
     <FormLayout onSubmit={submitForm}>
       <h4>A form to add information</h4>
       {formVisibility &&
-        FormDropDown.map(({ title, key, placeholder }) => {
+        FORM_DROP_DOWN.map(({ title, key, placeholder }) => {
           const val = customCarInfo[key];
           const valueToPass = val
             ? {

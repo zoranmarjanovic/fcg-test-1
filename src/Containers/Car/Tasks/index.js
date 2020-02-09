@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
-import CreateTask from "./CreateTask";
+import CreateTask from "./createTask";
 import InputCheckBox from "../../../Components/Input/CheckBox";
 import { PaperClip, CarWash, Payment } from "../../../Components/Icons";
-
+import { TASK_OPTIONS } from "./constants";
 import {
   fetchCarTasks,
   createTask,
@@ -10,13 +10,6 @@ import {
 } from "../../../Services/tasksOperation";
 
 import { TaskIconHolder, FormLayout, TaskList, TaskAction } from "./style";
-
-// import { taskOptions, taskList } from "../../Models";
-export const taskOptions = [
-  { value: "ADD_DOCUMENT", label: "Add Commnet" },
-  { value: "WASH_CAR", label: "Wash Car" },
-  { value: "ADD_PAYMENT_DETAILS", label: "Add payment Details" }
-];
 
 const TaskIcons = ({ iconName }) => {
   if (iconName === "ADD_DOCUMENT") {
@@ -93,7 +86,7 @@ function CarTask() {
         toggleModal={toggleModal}
         createTask={addTask}
         loading={loading}
-        taskOptions={taskOptions}
+        taskOptions={TASK_OPTIONS}
       />
     </FormLayout>
   );

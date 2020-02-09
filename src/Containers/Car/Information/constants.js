@@ -1,49 +1,49 @@
 // Exporting if TS being used
-export const PhysicalStatus = [
+export const PHYSICAL_STATUS = [
   { label: "At owner", value: "AT_OWNER" },
   { label: "At buyer", value: "AT_BUYER" },
   { label: "At our location", value: "AT_OUR_LOCATION" }
 ];
 
-export const LegalStatus = [
+export const LEGAL_STATUS = [
   { label: "Owner", value: "OWNER" },
   { label: "US", value: "US" },
   { label: "Buyer", value: "BUYER" }
 ];
 
-export const SellingStatus = [
+export const SELLING_STATUS = [
   { label: "Available", value: "AVAILABLE" },
   { label: "Pending", value: "PENDING" },
   { label: "Sold", value: "SOLD" },
   { label: "Reserved", value: "RESERVED" }
 ];
 
-export const EngineType = [
+export const ENGINE_TYPE = [
   { label: "Vee", value: "VEE" },
   { label: "Inline", value: "INLINE" },
   { label: "Boxer", value: "BOXER" },
   { label: "Rotary", value: "ROTARY" }
 ];
 
-export const statusDropDown = [
+export const STATUS_DROP_DOWN = [
   {
     key: "physicalStatus",
-    options: PhysicalStatus,
+    options: PHYSICAL_STATUS,
     title: "Physical Status"
   },
   {
     key: "legalStatus",
-    options: LegalStatus,
+    options: LEGAL_STATUS,
     title: "Legal Status"
   },
   {
     key: "sellingStatus",
-    options: SellingStatus,
+    options: SELLING_STATUS,
     title: "Seller Status"
   }
 ];
 
-export const carNameMap = {
+export const CAR_INFO_NAME_MAP = {
   AT_OWNER: "At owner",
   AT_BUYER: "At buyer",
   AT_OUR_LOCATION: "At our location",
