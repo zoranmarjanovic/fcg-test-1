@@ -14,17 +14,6 @@ export const Information = styled.div`
   }
 `;
 
-export const FormLayout = styled.form`
-  background: #fff;
-  padding: 20px;
-  box-shadow: 2px 6px 7px rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-  & > ${"h4"} {
-    font-size: 14px;
-    margin-bottom: 20px;
-  }
-`;
-
 export const MainHeading = styled.h3`
   padding: 15px 10px;
   margin-bottom: 10px;

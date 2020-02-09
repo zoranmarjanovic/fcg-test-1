@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import CreateTask from "./createTask";
 import InputCheckBox from "../../../Components/Input/CheckBox";
 import { PaperClip, CarWash, Payment } from "../../../Components/Icons";
+import Paper from "../../../Components/PaperLayout";
 import { TASK_OPTIONS } from "./constants";
 import {
   fetchCarTasks,
@@ -9,7 +10,7 @@ import {
   updateCarTasks
 } from "../../../Services/tasksOperation";
 
-import { TaskIconHolder, FormLayout, TaskList, TaskAction } from "./style";
+import { TaskIconHolder, TaskList, TaskAction } from "./style";
 
 const TaskIcons = ({ iconName }) => {
   if (iconName === "ADD_DOCUMENT") {
@@ -59,8 +60,7 @@ function CarTask() {
   };
 
   return (
-    <FormLayout>
-      <h4>A List of tasks</h4>
+    <Paper title={"A List of tasks"}>
       <div>
         {tasks &&
           tasks.map(({ comment, completed, id, taskType }) => (
@@ -88,7 +88,7 @@ function CarTask() {
         loading={loading}
         taskOptions={TASK_OPTIONS}
       />
-    </FormLayout>
+    </Paper>
   );
 }
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-
+import Paper from "../../../Components/PaperLayout";
 import InputDropDown from "../../../Components/Input/DropDown";
 import { FORM_DROP_DOWN } from "./contants";
 
@@ -115,8 +115,7 @@ function FinancialForm() {
   };
 
   return (
-    <FormLayout onSubmit={submitForm}>
-      <h4>A form to add information</h4>
+    <Paper title={"A form to add information"} onSubmit={submitForm}>
       {formVisibility &&
         FORM_DROP_DOWN.map(({ title, key, placeholder }) => {
           const val = customCarInfo[key];
@@ -146,7 +145,7 @@ function FinancialForm() {
           {carInfo.loading ? "Processing" : "Submit"}
         </Button>
       )}
-    </FormLayout>
+    </Paper>
   );
 }
 
