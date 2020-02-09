@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 
-import InputDropDown from "../../../Components/Input/DropDown";
-import InputTextArea from "../../../Components/Input/TextArea";
+import InputDropDown from "../../../Components/Form/DropDown";
+import InputText from "../../../Components/Form/Text";
 import Modal from "../../../Components/Modal";
 import { TASK_OPTIONS } from "./constants";
 import { InputHolder, TaskType, AddButton } from "./style";
@@ -37,7 +37,7 @@ function CreateCarTask({ modalStatus, toggleModal, createTask, loading }) {
         </label>
         <label>
           <TaskType>Task comment</TaskType>
-          <InputTextArea
+          <InputText
             name={"comment"}
             placeholder="Enter the comment for task"
           />

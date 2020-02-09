@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import CreateCarTask from "./createCarTask";
-import InputCheckBox from "../../../Components/Input/CheckBox";
+import InputCheckBox from "../../../Components/Form/CheckBox";
 import { PaperClip, CarWash, Payment } from "../../../Components/Icons";
 import Paper from "../../../Components/PaperLayout";
 import { TASK_OPTIONS } from "./constants";

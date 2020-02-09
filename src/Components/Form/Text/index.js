@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 
-const InputTextArea = ({
+const InputText = ({
   defaultValue = "",
   onChange,
   placeholder = "Enter your search",
@@ -28,4 +28,4 @@ const InputTextArea = ({
   );
 };
 
-export default InputTextArea;
+export default InputText;
