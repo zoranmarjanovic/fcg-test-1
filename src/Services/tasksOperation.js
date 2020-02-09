@@ -21,7 +21,6 @@ export const createTask = async taskInput => {
     const response = await apolloClient().mutate(createCarTask(taskInput));
     NotifySuccess("Successfully created task :)");
   } catch (error) {
-    console.log(error);
     NotifyError("Something went wrong in fetchCarTasks");
   }
 };
@@ -29,10 +28,8 @@ export const createTask = async taskInput => {
 export const updateCarTasks = async (taskId, value) => {
   try {
     const response = await apolloClient().mutate(updateCarTask(taskId, value));
-    console.log(response);
     NotifySuccess("Successfully created task :)");
   } catch (error) {
-    console.log(error);
     NotifyError("Something went wrong in fetchCarTasks");
   }
 };

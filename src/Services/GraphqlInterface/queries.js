@@ -32,32 +32,36 @@ export const queryModelInfo = make => ({
   }
 });
 
-export const queryTrimInfo = (make, model) => ({
-  query: graphQlTag`
+export const queryTrimInfo = ({ make, model, trim }) => {
+  return {
+    query: graphQlTag`
     query model($make: String!, $model: String!) {
       trim(make: $make, model: $model)
     }
   `,
-  variables: {
-    make,
-    model
-  }
-});
+    variables: {
+      make,
+      model
+    }
+  };
+};
 
-export const queryEngineInfo = (make, model, trim) => ({
-  query: graphQlTag`
+export const queryEngineInfo = ({ make, model, trim }) => {
+  return {
+    query: graphQlTag`
     query model($make: String!, $model: String!) {
       trim(make: $make, model: $model) {
         engine(make: $make, model: $model, trim: $trim)
       }
     }
   `,
-  variables: {
-    make,
-    model,
-    trim
-  }
-});
+    variables: {
+      make,
+      model,
+      trim
+    }
+  };
+};
 
 export const queryTasks = () => ({
   query: graphQlTag`

@@ -5,7 +5,6 @@ import InputDropDown from "../../../Components/Input/DropDown";
 import { FormDropDown, dataForForm } from "./model";
 
 import { updateCarData } from "../../../Store/Operations/carOperations";
-
 import {
   fetchMakeValues,
   fetchModelValues,
@@ -17,61 +16,101 @@ import { Information, Button, FormLayout } from "./style";
 function FinancialForm() {
   const dispatch = useDispatch();
   const { carInfo } = useSelector(state => state);
-  const [formData, setFormData] = useState(dataForForm);
-  const { make, model, trim, engine } = carInfo;
-  const [modifiedCarInfo, setModifiedCarInfo] = useState({
-    make,
-    model,
-    trim,
-    engine
-  });
+  const [formData, setFormData] = useState({ ...dataForForm });
+  const [formVisibility, setFormVisibility] = useState(false);
 
   useEffect(() => {
-    fetchMakeData();
+    initiateFetchMakeData();
   }, []);
 
-  const fetchMakeData = async () => {
-    const response = await fetchMakeValues();
-    setFormData({ ...formData, ...response });
+  useEffect(() => {
+    const { make, model, trim, id } = carInfo;
+    if (id) {
+      if (make) {
+        initiateFetchModelData(make);
+      }
+      if (make && model) {
+        initiateFetchTrimData(make, model);
+      }
+      setData({
+        makeDefaultValue: make ? { label: make, value: make } : null,
+        modelDefaultValue: model ? { label: model, value: model } : null,
+        trimDefaultValue: trim ? { label: trim, value: trim } : null
+      });
+      setFormVisibility(true);
+    }
+  }, [carInfo]);
+
+  const setData = response => {
+    // Setting the form in async way and with in callback
+    setFormData(formData => ({ ...formData, ...response }));
   };
 
-  const formHandler = async ({ value }, key) => {
-    setModifiedCarInfo({ ...modifiedCarInfo, ...{ [key]: value } });
+  const resetForm = data => {
+    setFormData({ ...dataForForm, ...data });
+  };
 
+  const formHandler = (value, key) => {
     if (key === "make") {
-      const response = await fetchModelValues(value);
-      setFormData({ ...formData, ...response });
-    } else if (key === "trim") {
-      const response = await fetchTrimValues(carInfo.make, value);
-      // setFormData({ ...formData, ...response });
-    } else if (key === "engine") {
-      //this is missing
-    }
+      initiateFetchModelData(value);
+      resetForm({
+        // we can automate reset function, for now I am keeping it like this
+        make: formData["make"],
+        makeDefaultValue: { label: value, value: value }
+      });
+    } else if (key === "model") {
+      initiateFetchTrimData(formData["makeDefaultValue"]["value"], value);
+      resetForm({
+        make: formData["make"],
+        makeDefaultValue: formData["make" + "DefaultValue"],
+        model: formData["model"],
+        modelDefaultValue: { label: value, value: value }
+      });
+    } // Skipping engine update for now
+  };
+
+  const initiateFetchMakeData = async () => {
+    setData(await fetchMakeValues());
+  };
+
+  const initiateFetchModelData = async value => {
+    setData(await fetchModelValues(value));
+  };
+
+  const initiateFetchTrimData = async (make, value) => {
+    setData(await fetchTrimValues({ make, value }));
   };
 
   const submitForm = e => {
     e.preventDefault();
-    updateCarData({ make: "BMW" }, dispatch);
+    // Skipping engine update for now
+    const { make, model, trim } = e.target;
+    updateCarData(
+      { make: make.value, model: model.value, trim: trim.value },
+      dispatch
+    );
   };
 
   return (
     <FormLayout onSubmit={submitForm}>
       <h4>A form to add information</h4>
-      {FormDropDown.map(({ title, key, placeholder }) => (
-        <Information key={key}>
-          <h6>{title}</h6>
-          <InputDropDown
-            onChange={e => {
-              // try to normalize the data
-              formHandler(e, key);
-            }}
-            defaultOption={modifiedCarInfo[key]}
-            options={formData[key]}
-            placeholder={`Select ${placeholder}`}
-          />
-        </Information>
-      ))}
-      {/* Move button later if its used by other component */}
+      {formVisibility &&
+        FormDropDown.map(({ title, key, placeholder }) => {
+          return (
+            <Information key={key}>
+              <h6>{title}</h6>
+              <InputDropDown
+                onChange={formHandler}
+                id={key}
+                name={key}
+                defaultValue={formData[key + "DefaultValue"]}
+                options={formData[key]}
+                placeholder={`Select ${placeholder}`}
+              />
+            </Information>
+          );
+        })}
+      {!formVisibility && <div>Loading Car Details, Please wait</div>}
       <Button>Submit</Button>
     </FormLayout>
   );

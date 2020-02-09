@@ -70,7 +70,6 @@ function CarTask() {
             <TaskList key={id}>
               <div>
                 <TaskIconHolder>
-                  {" "}
                   <TaskIcons iconName={taskType} />
                 </TaskIconHolder>
                 <span>{comment}</span>

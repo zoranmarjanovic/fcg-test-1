@@ -34,6 +34,12 @@
 .modal-header {
   display: flex;
   justify-content: flex-end;
+  position: relative;
+  z-index: 1;
+}
+.modal-header button {
+  position: absolute;
+  cursor: pointer;
 }
 
 .modal-close-button {

@@ -44,3 +44,36 @@ export const TaskIconHolder = styled.button`
   color: #fff;
   margin-right: 10px;
 `;
+
+export const InputHolder = styled.form`
+  position: relative;
+  > h3 {
+    font-size: 18px;
+    font-weight: bold;
+    padding-bottom: 10px;
+  }
+  > label {
+    width: 100%;
+    display: block;
+    padding: 10px 0 10px;
+    > input {
+      width: 100%;
+      min-height: 28px;
+      font-size: 16px;
+      padding: 4px 8px;
+    }
+  }
+`;
+export const TaskType = styled.h4`
+  font-size: 14px;
+  padding-bottom: 10px;
+`;
+
+export const AddButton = styled.button`
+  padding: 8px 22px;
+  border: 1px solid #eaeaea;
+  border-radius: 5px;
+  background-color: #149e14;
+  color: #fff;
+  cursor: pointer;
+`;

@@ -25,7 +25,6 @@ export const mutateCarInfo = carInput => ({
 
 export const createCarTask = taskInput => {
   const obj = setNullFields(taskInput);
-  console.log(obj);
   return {
     mutation: graphQlTag`
       mutation createTask($carId: ID!, $task: TaskInput!) {

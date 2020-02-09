@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 
 import InputDropDown from "../../../Components/Input/DropDown";
+import InputTextArea from "../../../Components/Input/TextArea";
 import Modal from "../../../Components/Modal";
 
-import { Information, Button, FormLayout } from "./style";
+import { InputHolder, TaskType, AddButton } from "./style";
 
 export const taskOptions = [
   { value: "ADD_DOCUMENT", label: "Add Commnet" },
@@ -12,41 +13,45 @@ export const taskOptions = [
 ];
 
 function CreateCarTask({ modalStatus, toggleModal, createTask }) {
-  const [taskComment, setTaskComment] = useState("");
-  const [taskName, setTaskName] = useState(null);
+  let taskName = "";
 
   const addTask = e => {
-    if (!taskComment && !taskComment) {
-      return;
-    }
-    createTask(taskName, taskComment);
+    e.preventDefault();
+    console.log(e.target.taskComment.value);
+    console.log(e.target.taskType);
+    // createTask(taskName, taskComment);
   };
+
+  const setComment = value => {
+    taskName = value;
+    console.log(taskName);
+  };
+
+  const setTaskComment = () => {};
 
   return (
     <Modal isShowing={modalStatus} hide={toggleModal}>
-      <div>
-        Modal
+      <InputHolder onSubmit={addTask}>
+        <h3>Create Task</h3>
         <label>
-          Task type
+          <TaskType>Task type</TaskType>
           <InputDropDown
+            name="taskType"
             options={taskOptions}
-            onChange={e => {
-              setTaskName(e.value);
-            }}
+            onChange={setComment}
             placeholder="Select an option"
           />
         </label>
         <label>
-          Task comment
-          <input
-            type="text"
-            onChange={e => {
-              setTaskComment(e.target.value);
-            }}
+          <TaskType>Task comment</TaskType>
+          <InputTextArea
+            name={"taskComment"}
+            placeholder="Enter the comment for task"
+            onChange={setTaskComment}
           />
         </label>
-        <button onClick={addTask}>Add</button>
-      </div>
+        <AddButton>Add</AddButton>
+      </InputHolder>
     </Modal>
   );
 }

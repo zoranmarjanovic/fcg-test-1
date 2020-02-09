@@ -1,11 +1,11 @@
 import React, { useState } from "react";
 
 const InputCheckBox = ({ checked = false, onChange, labelName, id }) => {
-  const [localValue, toggleLocalValue] = useState(checked);
+  const [inputValue, toggleInputValue] = useState(checked);
 
-  const inputCheckBoxHandler = () => {
-    const valueToSet = !localValue;
-    toggleLocalValue(valueToSet);
+  const inputCheckBoxHandler = e => {
+    const valueToSet = !inputValue;
+    toggleInputValue(valueToSet);
     if (onChange) {
       onChange(id, valueToSet);
     }
@@ -17,7 +17,7 @@ const InputCheckBox = ({ checked = false, onChange, labelName, id }) => {
       <input
         type="checkbox"
         onChange={inputCheckBoxHandler}
-        checked={localValue}
+        checked={inputValue}
       />
     </label>
   );

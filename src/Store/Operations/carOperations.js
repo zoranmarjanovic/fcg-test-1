@@ -38,7 +38,6 @@ export const updateCarData = async (carInput, dispatch) => {
     dispatch(fetchCarInfoBegin());
 
     const response = await apolloClient().mutate(mutateCarInfo(carInput));
-
     if (response && response.data) {
       const { updateCar } = response.data;
       dispatch(fetchCarInfoSuccess(updateCar));
