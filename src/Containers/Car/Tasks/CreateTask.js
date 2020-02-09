@@ -12,7 +12,7 @@ export const taskOptions = [
   { value: "ADD_PAYMENT_DETAILS", label: "Add payment Details" }
 ];
 
-function CreateCarTask({ modalStatus, toggleModal, createTask }) {
+function CreateCarTask({ modalStatus, toggleModal, createTask, loading }) {
   const [taskType, setTaskType] = useState(null);
   const addTask = e => {
     e.preventDefault();
@@ -48,7 +48,7 @@ function CreateCarTask({ modalStatus, toggleModal, createTask }) {
             placeholder="Enter the comment for task"
           />
         </label>
-        <AddButton>Add</AddButton>
+        <AddButton primary={loading}>Add</AddButton>
       </InputHolder>
     </Modal>
   );

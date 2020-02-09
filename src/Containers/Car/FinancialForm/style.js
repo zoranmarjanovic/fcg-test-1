@@ -30,9 +30,11 @@ export const MainHeading = styled.h3`
   margin-bottom: 10px;
 `;
 export const Button = styled.button`
+  pointer-events: ${props => (props.primary ? "none" : "inherit")};
   padding: 8px 22px;
+  cursor: pointer;
   border: 1px solid #eaeaea;
   border-radius: 5px;
-  background-color: #149e14;
-  color: #fff;
+  background-color: ${props => (props.primary ? "#eaeaea" : "#149e14")};
+  color: ${props => (props.primary ? "#000" : "#fff")};
 `;

@@ -4,7 +4,7 @@ import { useDispatch, useSelector } from "react-redux";
 import FinancialInformation from "../../../Components/FinancialInformation";
 import InputDropDown from "../../../Components/Input/DropDown";
 import { updateCarData } from "../../../Store/Operations/carOperations";
-import { StatusDropDown, CarNameMap } from "./model";
+import { statusDropDown, carNameMap } from "./model";
 
 import {
   InformationLayout,
@@ -43,9 +43,9 @@ function CarInformation() {
       {carInfo.id && (
         <InformationHolder>
           <h4>Status</h4>
-          {StatusDropDown.map(({ options, title, key }) => {
+          {statusDropDown.map(({ options, title, key }) => {
             const inputValue = {
-              label: CarNameMap[carInfo[key]],
+              label: carNameMap[carInfo[key]],
               value: carInfo[key]
             };
             return (

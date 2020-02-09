@@ -41,7 +41,7 @@ export const updateCarData = async (carInput, dispatch) => {
     if (response && response.data) {
       const { updateCar } = response.data;
       dispatch(fetchCarInfoSuccess(updateCar));
-      NotifySuccess("Successfully updated");
+      NotifySuccess("Updated Car Information Successfully");
     } else {
       dispatch(fetchCarInfoError());
       NotifyError();

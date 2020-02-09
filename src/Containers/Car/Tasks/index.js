@@ -9,13 +9,7 @@ import {
   updateCarTasks
 } from "../../../Services/tasksOperation";
 
-import {
-  Information,
-  TaskIconHolder,
-  FormLayout,
-  TaskList,
-  TaskAction
-} from "./style";
+import { TaskIconHolder, FormLayout, TaskList, TaskAction } from "./style";
 
 // import { taskOptions, taskList } from "../../Models";
 export const taskOptions = [
@@ -38,9 +32,16 @@ const TaskIcons = ({ iconName }) => {
 function CarTask() {
   const [tasks, setTasks] = useState([]);
   const [modalStatus, setModalStatus] = useState(false);
+  const [loading, setLoading] = useState(false);
 
-  const addTask = taskType => {
-    createTask(taskType);
+  const addTask = async taskType => {
+    setLoading(true);
+    const response = await createTask(taskType);
+    if (response) {
+      // We can set as locally instead of calling the API
+      initiateToFetchCarTasks();
+      toggleModal();
+    }
   };
 
   useEffect(() => {
@@ -57,10 +58,13 @@ function CarTask() {
   };
 
   const toggleModal = e => {
-    e.preventDefault();
+    if (e) {
+      e.preventDefault();
+    }
     setModalStatus(!modalStatus);
+    setLoading(false);
   };
-  // createTask
+
   return (
     <FormLayout>
       <h4>A List of tasks</h4>
@@ -88,6 +92,7 @@ function CarTask() {
         modalStatus={modalStatus}
         toggleModal={toggleModal}
         createTask={addTask}
+        loading={loading}
         taskOptions={taskOptions}
       />
     </FormLayout>

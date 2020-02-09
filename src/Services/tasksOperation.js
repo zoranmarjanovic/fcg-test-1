@@ -20,6 +20,11 @@ export const createTask = async obj => {
   try {
     const response = await apolloClient().mutate(createCarTask(obj));
     NotifySuccess("Successfully created task :)");
+    if (response && response.data) {
+      return response.data;
+    } else {
+      return [];
+    }
   } catch (error) {
     NotifyError("Something went wrong in fetchCarTasks");
   }

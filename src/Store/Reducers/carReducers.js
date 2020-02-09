@@ -4,18 +4,34 @@ import {
   FETCH_CAR_INFO_ERROR
 } from "../Constants";
 
-import { carInfoModel } from "../../Containers/Car/Information/model";
+const carInfoModel = {
+  id: "",
+  make: "",
+  model: "",
+  trim: "",
+  financialDetails: {
+    purchasePrice: "",
+    purchaseDate: "",
+    purchaseLocation: "",
+    paymentDonePercentage: "",
+    sellingPrice: "",
+    sellingDate: "",
+    sellingLocation: "",
+    sellingDonePercentage: "",
+    margin: ""
+  }
+};
 
 const carReducer = (state = carInfoModel, action) => {
   switch (action.type) {
     case FETCH_CAR_INFO_BEGIN:
-      return { ...state, ...action.payload };
+      return { ...state, loading: action.loading };
 
     case FETCH_CAR_INFO_SUCCESS:
-      return { ...action.payload };
+      return { ...action.payload, loading: action.loading };
 
     case FETCH_CAR_INFO_ERROR:
-      return {};
+      return { error: action.error };
 
     default:
       return state;

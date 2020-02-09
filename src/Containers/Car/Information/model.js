@@ -25,7 +25,7 @@ export const EngineType = [
   { label: "Rotary", value: "ROTARY" }
 ];
 
-export const StatusDropDown = [
+export const statusDropDown = [
   {
     key: "physicalStatus",
     options: PhysicalStatus,
@@ -43,7 +43,7 @@ export const StatusDropDown = [
   }
 ];
 
-export const CarNameMap = {
+export const carNameMap = {
   AT_OWNER: "At owner",
   AT_BUYER: "At buyer",
   AT_OUR_LOCATION: "At our location",
@@ -58,22 +58,4 @@ export const CarNameMap = {
   INLINE: "Inline",
   BOXER: "Boxer",
   ROTARY: "Rotary"
-};
-
-export const carInfoModel = {
-  id: "",
-  make: "",
-  model: "",
-  trim: "",
-  financialDetails: {
-    purchasePrice: "",
-    purchaseDate: "",
-    purchaseLocation: "",
-    paymentDonePercentage: "",
-    sellingPrice: "",
-    sellingDate: "",
-    sellingLocation: "",
-    sellingDonePercentage: "",
-    margin: ""
-  }
 };

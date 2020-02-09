@@ -55,31 +55,25 @@ function FinancialForm() {
       initiateFetchModelData(value);
       setData({
         // we can improve this function by supplying building more dynamic
-        make: {
-          label: value,
-          value: value
-        },
+        make: value,
         model: null,
-        trim: null
+        modelOptions: [],
+        trim: null,
+        trimOptions: []
       });
     } else if (key === "model") {
       initiateFetchTrimData(customCarInfo["make"], value);
       setData({
         make: customCarInfo["make"],
-        model: {
-          label: value,
-          value: value
-        },
-        trim: null
+        model: value,
+        trim: null,
+        trimOptions: []
       });
     } else if (key === "trim") {
       setData({
         make: customCarInfo["make"],
         model: customCarInfo["model"],
-        trim: {
-          label: value,
-          value: value
-        }
+        trim: value
       });
     } // Skipping engine update for now
   };
@@ -97,7 +91,6 @@ function FinancialForm() {
   };
 
   const initiateFetchTrimData = async (make, value) => {
-    debugger;
     const response = await fetchTrimValues(make, value);
     if (!response) {
       return;
@@ -113,9 +106,9 @@ function FinancialForm() {
     const { make, model, trim } = customCarInfo;
     updateCarData(
       {
-        make: (make && make.value) || "",
-        model: (model && model.value) || "",
-        trim: (trim && trim.value) || ""
+        make: make || "",
+        model: model || "",
+        trim: trim || ""
       },
       dispatch
     );
@@ -129,7 +122,7 @@ function FinancialForm() {
           const val = customCarInfo[key];
           const valueToPass = val
             ? {
-                label: val,
+                label: val, //keeping the label and value for same now
                 value: val
               }
             : null;
@@ -148,7 +141,11 @@ function FinancialForm() {
           );
         })}
       {!formVisibility && <div>Loading Car Details, Please wait</div>}
-      <Button>Submit</Button>
+      {formVisibility && (
+        <Button primary={carInfo.loading}>
+          {carInfo.loading ? "Processing" : "Submit"}
+        </Button>
+      )}
     </FormLayout>
   );
 }

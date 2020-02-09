@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 
 const InputTextArea = ({
-  defaultOption = "",
+  defaultValue = "",
   onChange,
   placeholder = "Enter your search",
   name
 }) => {
-  const [inputValue, setInputValue] = useState(defaultOption);
+  const [inputValue, setInputValue] = useState(defaultValue);
 
   const onChangeHandler = e => {
     e.preventDefault();
