@@ -16,6 +16,7 @@ export const TaskList = styled.div`
   display: flex;
   padding-bottom: 20px;
   justify-content: space-between;
+  text-transform: capitalize;
 `;
 
 export const TaskAction = styled.button`

@@ -39,8 +39,8 @@ function CarTask() {
   const [tasks, setTasks] = useState([]);
   const [modalStatus, setModalStatus] = useState(false);
 
-  const addTask = (taskType, comment) => {
-    createTask({ taskType, comment });
+  const addTask = taskType => {
+    createTask(taskType);
   };
 
   useEffect(() => {

@@ -13,21 +13,14 @@ export const taskOptions = [
 ];
 
 function CreateCarTask({ modalStatus, toggleModal, createTask }) {
-  let taskName = "";
-
   const addTask = e => {
     e.preventDefault();
-    console.log(e.target.taskComment.value);
-    console.log(e.target.taskType);
-    // createTask(taskName, taskComment);
+    const { comment, taskType } = e.target;
+    if (!comment || !taskType) {
+      return;
+    }
+    createTask({ taskType: taskType.value, comment: comment.value });
   };
-
-  const setComment = value => {
-    taskName = value;
-    console.log(taskName);
-  };
-
-  const setTaskComment = () => {};
 
   return (
     <Modal isShowing={modalStatus} hide={toggleModal}>
@@ -38,16 +31,14 @@ function CreateCarTask({ modalStatus, toggleModal, createTask }) {
           <InputDropDown
             name="taskType"
             options={taskOptions}
-            onChange={setComment}
             placeholder="Select an option"
           />
         </label>
         <label>
           <TaskType>Task comment</TaskType>
           <InputTextArea
-            name={"taskComment"}
+            name={"comment"}
             placeholder="Enter the comment for task"
-            onChange={setTaskComment}
           />
         </label>
         <AddButton>Add</AddButton>

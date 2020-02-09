@@ -23,8 +23,8 @@ export const mutateCarInfo = carInput => ({
   }
 });
 
-export const createCarTask = taskInput => {
-  const obj = setNullFields(taskInput);
+export const createCarTask = task => {
+  console.log(task);
   return {
     mutation: graphQlTag`
       mutation createTask($carId: ID!, $task: TaskInput!) {
@@ -33,7 +33,7 @@ export const createCarTask = taskInput => {
     `,
     variables: {
       carId,
-      task: obj
+      task: task
     }
   };
 };
