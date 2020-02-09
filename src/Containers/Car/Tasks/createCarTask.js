@@ -17,7 +17,7 @@ function CreateCarTask({ modalStatus, toggleModal, createTask, loading }) {
     createTask({ taskType: taskType.value, comment: comment.value });
   };
 
-  const changeTaskType = ({ value, label }) => {
+  const onChangeHandler = ({ value, label }) => {
     setTaskType({ label, value });
   };
 
@@ -30,7 +30,7 @@ function CreateCarTask({ modalStatus, toggleModal, createTask, loading }) {
           <InputDropDown
             name="taskType"
             value={taskType}
-            onChange={changeTaskType}
+            onChange={onChangeHandler}
             options={TASK_OPTIONS}
             placeholder="Select an option"
           />

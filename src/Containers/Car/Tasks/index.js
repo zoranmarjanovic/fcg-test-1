@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import CreateTask from "./createTask";
+import CreateCarTask from "./createCarTask";
 import InputCheckBox from "../../../Components/Input/CheckBox";
 import { PaperClip, CarWash, Payment } from "../../../Components/Icons";
 import Paper from "../../../Components/PaperLayout";
@@ -28,7 +28,7 @@ function CarTask() {
   const [modalStatus, setModalStatus] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  const addTask = async taskType => {
+  const createTaskHandler = async taskType => {
     setLoading(true);
     const response = await createTask(taskType);
     if (response) {
@@ -81,10 +81,10 @@ function CarTask() {
         {!tasks || (!tasks.length && <div>Opps No task</div>)}
         <TaskAction onClick={toggleModal}>+</TaskAction>
       </div>
-      <CreateTask
+      <CreateCarTask
         modalStatus={modalStatus}
         toggleModal={toggleModal}
-        createTask={addTask}
+        createTask={createTaskHandler}
         loading={loading}
         taskOptions={TASK_OPTIONS}
       />
