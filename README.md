@@ -23,11 +23,11 @@
 - I have introduced Paper component which servers Information form and Task.
 - Presentation layer will also have its own state, but ideally its limited locally. Only used in Inputs
 
-### Feature I have used
+### Features I have used
 
-- Portal for showing the Modal
+- React Portal for showing the Modal
 - React-redux with Hooks
-- Scalable architecture
+- Scalable architecture (Presentational layer and Container layer)
 - Styled components for styling
 
 ### What I could have done more
