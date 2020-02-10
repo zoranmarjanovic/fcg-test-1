@@ -10,7 +10,7 @@ import {
   updateCarTasks
 } from "../../../Services/tasksOperation";
 
-import { TaskIconHolder, TaskList, TaskAction } from "./style";
+import { TaskIconHolder, TaskList, TaskAction, TaskHolder } from "./style";
 
 const TaskIcons = ({ iconName }) => {
   if (iconName === "ADD_DOCUMENT") {
@@ -23,8 +23,8 @@ const TaskIcons = ({ iconName }) => {
   return null;
 };
 
-function CarTask() {
-  const [tasks, setTasks] = useState([]);
+function CarTask({ task }) {
+  const [tasks, setTasks] = useState(task);
   const [modalStatus, setModalStatus] = useState(false);
   const [loading, setLoading] = useState(false);
 
@@ -61,26 +61,30 @@ function CarTask() {
 
   return (
     <Paper title={"A List of tasks"}>
-      <div>
-        {tasks &&
-          tasks.map(({ comment, completed, id, taskType }) => (
-            <TaskList key={id}>
-              <div>
-                <TaskIconHolder>
-                  <TaskIcons iconName={taskType} />
-                </TaskIconHolder>
-                <span>{comment}</span>
-              </div>
-              <InputCheckBox
-                id={id}
-                checked={completed}
-                onChange={onChangeTask}
-              />
-            </TaskList>
-          ))}
+      <TaskHolder>
+        <div data-testid="taskListRender">
+          {tasks &&
+            tasks.map(({ comment, completed, id, taskType }) => (
+              <TaskList key={id}>
+                <div>
+                  <TaskIconHolder>
+                    <TaskIcons iconName={taskType} />
+                  </TaskIconHolder>
+                  <span>{comment}</span>
+                </div>
+                <InputCheckBox
+                  id={id}
+                  checked={completed}
+                  onChange={onChangeTask}
+                />
+              </TaskList>
+            ))}
+        </div>
         {!tasks || (!tasks.length && <div>Opps No task</div>)}
-        <TaskAction onClick={toggleModal}>+</TaskAction>
-      </div>
+        <TaskAction data-testid="taskModal" onClick={toggleModal}>
+          +
+        </TaskAction>
+      </TaskHolder>
       <CreateCarTask
         modalStatus={modalStatus}
         toggleModal={toggleModal}

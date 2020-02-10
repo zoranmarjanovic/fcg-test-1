@@ -15,6 +15,8 @@ const InputCheckBox = ({ checked = false, onChange, labelName, id }) => {
     <label>
       {labelName}
       <input
+        id={id}
+        data-testid={id}
         type="checkbox"
         onChange={inputCheckBoxHandler}
         checked={inputValue}

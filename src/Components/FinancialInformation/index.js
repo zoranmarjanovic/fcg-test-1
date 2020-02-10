@@ -1,12 +1,14 @@
 import React from "react";
 import { DateTime } from "../DateTime";
+import { DateLocation, Margin } from "./style";
 
 function FinancialInformation({
   item,
   itemHead,
   itemDate,
   itemLocation,
-  itemPercentage
+  itemPercentage,
+  margin
 }) {
   return (
     <>
@@ -15,9 +17,10 @@ function FinancialInformation({
         <>
           <div>
             ${item}
-            <span>
+            {margin ? <Margin>+{margin}</Margin> : null}
+            <DateLocation>
               (<DateTime purchaseDate={itemDate} />, {itemLocation})
-            </span>
+            </DateLocation>
           </div>
           <div>{itemPercentage}% payments to buyer done</div>
         </>

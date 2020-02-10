@@ -22,7 +22,7 @@ function CreateCarTask({ modalStatus, toggleModal, createTask, loading }) {
   };
 
   return (
-    <Modal isShowing={modalStatus} hide={toggleModal}>
+    <Modal data-testid="createModal" isShowing={modalStatus} hide={toggleModal}>
       <InputHolder onSubmit={addTask}>
         <h3>Create Task</h3>
         <label>

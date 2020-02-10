@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import FinancialInformation from "../../../Components/FinancialInformation";
-import InputDropDown from "../../../Components/Input/DropDown";
+import InputDropDown from "../../../Components/Form/DropDown";
 import { updateCarData } from "../../../Store/Operations/carOperations";
 import { STATUS_DROP_DOWN, CAR_INFO_NAME_MAP } from "./constants";
 
@@ -40,41 +40,45 @@ function CarInformation() {
       <ImageHolder>
         <img srcSet="/car_image.jpg" alt="car" />
       </ImageHolder>
-      {carInfo.id && (
-        <InformationHolder>
-          <h4>Status</h4>
-          {STATUS_DROP_DOWN.map(({ options, title, key }) => {
-            const inputValue = {
-              label: CAR_INFO_NAME_MAP[carInfo[key]],
-              value: carInfo[key]
-            };
-            return (
-              <Information key={key}>
-                <h6>{title}</h6>
-                <InputDropDown
-                  id={key}
-                  onChange={dropdownChangeHandler}
-                  value={inputValue}
-                  options={options}
-                  placeholder={`Select ${title}`}
-                />
-              </Information>
-            );
-          })}
-        </InformationHolder>
-      )}
+      <InformationHolder>
+        <h4>Status</h4>
+        {carInfo.id && (
+          <div data-testid="status-holder">
+            {STATUS_DROP_DOWN.map(({ options, title, key }) => {
+              const inputValue = carInfo[key]
+                ? {
+                    label: CAR_INFO_NAME_MAP[carInfo[key]],
+                    value: carInfo[key]
+                  }
+                : null;
+              return (
+                <Information key={key}>
+                  <h6>{title}</h6>
+                  <InputDropDown
+                    id={key}
+                    name={key}
+                    onChange={dropdownChangeHandler}
+                    value={inputValue}
+                    options={options}
+                    placeholder={`Select ${title}`}
+                  />
+                </Information>
+              );
+            })}
+          </div>
+        )}
+      </InformationHolder>
 
       {/* Car Financial Information */}
-      <InformationHolder>
+      <InformationHolder data-testid="dummy-purchase-location">
         <h4>Financial Information</h4>
         <Information>
           <FinancialInformation
             item={purchasePrice}
             itemHead="Purchased"
-            margin={margin}
             itemDate={purchaseDate}
-            itemPercentage={purchaseLocation}
-            itemLocation={paymentDonePercentage}
+            itemPercentage={paymentDonePercentage}
+            itemLocation={purchaseLocation}
           />
         </Information>
 

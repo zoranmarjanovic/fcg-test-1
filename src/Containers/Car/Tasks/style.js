@@ -67,3 +67,5 @@ export const AddButton = styled.button`
   background-color: ${props => (props.primary ? "#eaeaea" : "#149e14")};
   color: ${props => (props.primary ? "#000" : "#fff")};
 `;
+
+export const TaskHolder = styled.div``;

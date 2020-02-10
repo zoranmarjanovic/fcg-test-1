@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Paper from "../../../Components/PaperLayout";
-import InputDropDown from "../../../Components/Input/DropDown";
+import InputDropDown from "../../../Components/Form/DropDown";
 import { FORM_DROP_DOWN } from "./contants";
 
 import { updateCarData } from "../../../Store/Operations/carOperations";
@@ -20,7 +20,7 @@ function FinancialForm() {
   const [customCarInfo, setCustomCarInfo] = useState();
 
   useEffect(() => {
-    const { make, model, id } = carInfo;
+    const { make, model, id } = carInfo || {};
     if (id && !formVisibility) {
       setCustomCarInfo(carInfo);
       initiateFetchMakeData();
@@ -116,32 +116,35 @@ function FinancialForm() {
 
   return (
     <Paper title={"A form to add information"} onSubmit={submitForm}>
-      {formVisibility &&
-        FORM_DROP_DOWN.map(({ title, key, placeholder }) => {
-          const val = customCarInfo[key];
-          const valueToPass = val
-            ? {
-                label: val, //keeping the label and value for same now
-                value: val
-              }
-            : null;
-          return (
-            <Information key={key}>
-              <h6>{title}</h6>
-              <InputDropDown
-                onChange={formHandler}
-                id={key}
-                name={key}
-                value={valueToPass}
-                options={customCarInfo[key + "Options"]}
-                placeholder={`Select ${placeholder}`}
-              />
-            </Information>
-          );
-        })}
+      <div data-testid="financial-form-holder">
+        {formVisibility &&
+          FORM_DROP_DOWN.map(({ title, key, placeholder }) => {
+            const val = customCarInfo[key];
+            const valueToPass = val
+              ? {
+                  label: val, //keeping the label and value for same now
+                  value: val
+                }
+              : null;
+            return (
+              <Information key={key}>
+                <h6>{title}</h6>
+                <InputDropDown
+                  onChange={formHandler}
+                  id={key}
+                  name={key}
+                  value={valueToPass}
+                  options={customCarInfo[key + "Options"]}
+                  placeholder={`Select ${placeholder}`}
+                />
+              </Information>
+            );
+          })}
+      </div>
+
       {!formVisibility && <div>Loading Car Details, Please wait</div>}
       {formVisibility && (
-        <Button primary={carInfo.loading}>
+        <Button data-testid="submit-form" primary={carInfo.loading}>
           {carInfo.loading ? "Processing" : "Submit"}
         </Button>
       )}
