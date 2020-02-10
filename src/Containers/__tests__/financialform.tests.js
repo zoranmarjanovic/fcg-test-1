@@ -7,40 +7,29 @@ import { render, cleanup, screen, fireEvent } from "@testing-library/react";
 
 import { CAR_INFO } from "../Uitls/constants";
 
-describe("<Financial Form />", () => {
-  const mockStore = configureMockStore();
+const mockStore = configureMockStore();
+const store = mockStore({
+  carInfo: CAR_INFO
+});
+function renderWithRedux(ui) {
+  return { ...render(<Provider store={store}>{ui}</Provider>) };
+}
 
+describe("<Financial Form />", () => {
   afterEach(() => {
     cleanup();
     jest.resetAllMocks();
   });
 
   test("Renders 3 Financial options correctly", async () => {
-    const store = mockStore({
-      carInfo: CAR_INFO
-    });
-
-    const { getByTestId } = render(
-      <Provider store={store}>
-        <FinancialForm />
-      </Provider>
-    );
+    const { getByTestId } = renderWithRedux(<FinancialForm />);
     const element = getByTestId("financial-form-holder");
     expect(element.children.length).toBe(3);
   });
 
   test("On submitting financial form calls form submit API", async () => {
-    const store = mockStore({
-      carInfo: CAR_INFO
-    });
-
     const updateCarData = jest.fn();
-
-    render(
-      <Provider store={store}>
-        <FinancialForm />
-      </Provider>
-    );
+    renderWithRedux(<FinancialForm />);
     fireEvent.click(screen.getByTestId("submit-form"));
     // will continue last
   });
