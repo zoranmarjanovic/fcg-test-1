@@ -11,7 +11,7 @@
 - I have used React-redux as a global management.
 - I could have also used useContext + useReducer as well, but due to several down side I have kept aside for now
 - I have used redux only for storing the Car information.
-- Task data is stored an maintained in its own component called Task
+- Task data is stored and maintained in its own component called Task. Since task is not shared across I have limited with in task component.
 - Action, reducers and its relative constants are grouped under Store
 - Operation is the only file that can be interacted to maintain the store. It helps in dispatching as well maintaining the store
 
@@ -36,4 +36,5 @@
 - Optimization (React memoization to avoid re-render.)
 - Error Boundaries to sustain the APP even if the error exisit.
 - Better Git Commit
+- More test cases.
 - Better loader
