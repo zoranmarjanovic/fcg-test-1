@@ -18,6 +18,7 @@ export const MainHeading = styled.h3`
   padding: 15px 10px;
   margin-bottom: 10px;
 `;
+
 export const Button = styled.button`
   pointer-events: ${props => (props.primary ? "none" : "inherit")};
   padding: 8px 22px;
@@ -26,4 +27,7 @@ export const Button = styled.button`
   border-radius: 5px;
   background-color: ${props => (props.primary ? "#eaeaea" : "#149e14")};
   color: ${props => (props.primary ? "#000" : "#fff")};
+  @media (max-width: 768px) {
+    padding: 12px 30px;
+  }
 `;

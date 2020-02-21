@@ -11,6 +11,9 @@ export const FormTaskLayer = styled.div`
   }
   @media (max-width: 768px) {
   }
+  @media (max-width: 480px) {
+    padding: 10px;
+  }
 `;
 
 export const FormLayout = styled.form`

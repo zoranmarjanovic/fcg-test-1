@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
+const ELEMENTS_SEPARATION_SPACE = "0 0 10px";
+
 export const InformationLayout = styled.div`
   display: grid;
   box-shadow: 1px 5px 6px rgba(0, 0, 0, 0.3);
@@ -19,6 +21,7 @@ export const InformationLayout = styled.div`
       "imageInfo"
       "financialInfo"
       "carInfo";
+    padding: 10px;
   }
 `;
 
@@ -32,6 +35,12 @@ export const ImageHolder = styled.div`
   @media (max-width: 768px) {
     max-width: none;
     grid-area: imageInfo;
+    border: 1px solid #eaeaea;
+    box-shadow: 0px 2px 12px rgba(1, 1, 1, 0.2);
+    border-radius: 5px;
+  }
+  @media (max-width: 480px) {
+    margin: ${ELEMENTS_SEPARATION_SPACE};
   }
 `;
 
@@ -46,14 +55,37 @@ export const InformationHolder = styled.div`
   }
   @media (max-width: 768px) {
     grid-area: ${props => props.styleId};
+    padding: 12px 12px;
+    min-width: 250px;
+    border: 1px solid #eaeaea;
+    box-shadow: 1px 1px 1px rgba(1, 1, 1, 0.4);
+    box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 4px;
+    & > ${"h4"} {
+      font-size: 24px;
+      border-bottom: 0;
+      margin-bottom: 0;
+    }
+  }
+  @media (max-width: 480px) {
+    margin: ${ELEMENTS_SEPARATION_SPACE};
   }
 `;
 
 export const Information = styled.div`
   font-size: 14px;
   margin-bottom: 14px;
+
   & > ${"h6"} {
     font-size: 12px;
     margin-bottom: 5px;
+  }
+  @media (max-width: 768px) {
+    & > ${"h6"} {
+      font-size: 16px;
+      font-weight: bold;
+      padding: 12px 0 0;
+      margin-bottom: 10px;
+    }
   }
 `;

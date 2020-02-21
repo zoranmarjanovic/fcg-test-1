@@ -9,3 +9,7 @@ export const Margin = styled.span`
   color: green;
   margin-left: 5px;
 `;
+
+export const PriceInfo = styled.div`
+  margin-bottom: 14px;
+`;

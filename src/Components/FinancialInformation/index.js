@@ -1,6 +1,6 @@
 import React from "react";
 import { DateTime } from "../DateTime";
-import { DateLocation, Margin } from "./style";
+import { DateLocation, Margin, PriceInfo } from "./style";
 
 function FinancialInformation({
   item,
@@ -15,14 +15,14 @@ function FinancialInformation({
       <h6>{itemHead}</h6>
       {item && (
         <>
-          <div>
+          <PriceInfo>
             ${item}
             {margin ? <Margin>+{margin}</Margin> : null}
             <DateLocation>
               (<DateTime purchaseDate={itemDate} />, {itemLocation})
             </DateLocation>
-          </div>
-          <div>{itemPercentage}% payments to buyer done</div>
+          </PriceInfo>
+          <PriceInfo>{itemPercentage}% payments to buyer done</PriceInfo>
         </>
       )}
       {!item && "Not Available"}
