@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import Paper from "../../../Components/PaperLayout";
+import FormLayout from "../../../Components/Form/FormLayout";
 import InputDropDown from "../../../Components/Form/DropDown";
 import { FORM_DROP_DOWN } from "./contants";
 import { TitleH5 } from "../../../Components/Titles";
@@ -116,39 +117,41 @@ function FinancialForm() {
   };
 
   return (
-    <Paper title={"Update Information"} onSubmit={submitForm}>
-      <div data-testid="financial-form-holder">
-        {formVisibility &&
-          FORM_DROP_DOWN.map(({ title, key, placeholder }) => {
-            const val = customCarInfo[key];
-            const valueToPass = val
-              ? {
-                  label: val, //keeping the label and value for same now
-                  value: val
-                }
-              : null;
-            return (
-              <Information key={key}>
-                <TitleH5 value={title} />
-                <InputDropDown
-                  onChange={formHandler}
-                  id={key}
-                  name={key}
-                  value={valueToPass}
-                  options={customCarInfo[key + "Options"]}
-                  placeholder={`Select ${placeholder}`}
-                />
-              </Information>
-            );
-          })}
-      </div>
+    <Paper title={"Update Information"}>
+      <FormLayout onSubmit={submitForm}>
+        <div data-testid="financial-form-holder">
+          {formVisibility &&
+            FORM_DROP_DOWN.map(({ title, key, placeholder }) => {
+              const val = customCarInfo[key];
+              const valueToPass = val
+                ? {
+                    label: val, //keeping the label and value for same now
+                    value: val
+                  }
+                : null;
+              return (
+                <Information key={key}>
+                  <TitleH5 value={title} />
+                  <InputDropDown
+                    onChange={formHandler}
+                    id={key}
+                    name={key}
+                    value={valueToPass}
+                    options={customCarInfo[key + "Options"]}
+                    placeholder={`Select ${placeholder}`}
+                  />
+                </Information>
+              );
+            })}
+        </div>
 
-      {!formVisibility && <div>Loading Car Details, Please wait</div>}
-      {formVisibility && (
-        <Button data-testid="submit-form" primary={carInfo.loading}>
-          {carInfo.loading ? "Processing" : "Submit"}
-        </Button>
-      )}
+        {!formVisibility && <div>Loading Car Details, Please wait</div>}
+        {formVisibility && (
+          <Button data-testid="submit-form" primary={carInfo.loading}>
+            {carInfo.loading ? "Processing" : "Submit"}
+          </Button>
+        )}
+      </FormLayout>
     </Paper>
   );
 }

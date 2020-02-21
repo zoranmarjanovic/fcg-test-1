@@ -3,6 +3,7 @@ import CreateCarTask from "./createCarTask";
 import InputCheckBox from "../../../Components/Form/CheckBox";
 import { PaperClip, CarWash, Payment } from "../../../Components/Icons";
 import Paper from "../../../Components/PaperLayout";
+import FormLayout from "../../../Components/Form/FormLayout";
 import { TASK_OPTIONS } from "./constants";
 import {
   fetchCarTasks,
@@ -61,37 +62,39 @@ function CarTask({ task }) {
 
   return (
     <Paper title={"A List of tasks"}>
-      <TaskHolder>
-        <div data-testid="taskListRender">
-          {tasks &&
-            tasks.map(({ comment, completed, id, taskType }) => (
-              <TaskList key={id}>
-                <div>
-                  <TaskIconHolder>
-                    <TaskIcons iconName={taskType} />
-                  </TaskIconHolder>
-                  <span>{comment}</span>
-                </div>
-                <InputCheckBox
-                  id={id}
-                  checked={completed}
-                  onChange={onChangeTask}
-                />
-              </TaskList>
-            ))}
-        </div>
-        {!tasks || (!tasks.length && <div>Opps No task</div>)}
-        <TaskAction data-testid="taskModal" onClick={toggleModal}>
-          +
-        </TaskAction>
-      </TaskHolder>
-      <CreateCarTask
-        modalStatus={modalStatus}
-        toggleModal={toggleModal}
-        createTask={createTaskHandler}
-        loading={loading}
-        taskOptions={TASK_OPTIONS}
-      />
+      <FormLayout>
+        <TaskHolder>
+          <div data-testid="taskListRender">
+            {tasks &&
+              tasks.map(({ comment, completed, id, taskType }) => (
+                <TaskList key={id}>
+                  <div>
+                    <TaskIconHolder>
+                      <TaskIcons iconName={taskType} />
+                    </TaskIconHolder>
+                    <span>{comment}</span>
+                  </div>
+                  <InputCheckBox
+                    id={id}
+                    checked={completed}
+                    onChange={onChangeTask}
+                  />
+                </TaskList>
+              ))}
+          </div>
+          {!tasks || (!tasks.length && <div>Opps No task</div>)}
+          <TaskAction data-testid="taskModal" onClick={toggleModal}>
+            +
+          </TaskAction>
+        </TaskHolder>
+        <CreateCarTask
+          modalStatus={modalStatus}
+          toggleModal={toggleModal}
+          createTask={createTaskHandler}
+          loading={loading}
+          taskOptions={TASK_OPTIONS}
+        />
+      </FormLayout>
     </Paper>
   );
 }
