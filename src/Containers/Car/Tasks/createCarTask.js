@@ -1,19 +1,24 @@
 import React, { useState } from "react";
 
 import InputDropDown from "../../../Components/Form/DropDown";
+import Required from "../../../Components/Required";
 import InputText from "../../../Components/Form/Text";
 import Modal from "../../../Components/Modal";
 import { TASK_OPTIONS } from "./constants";
-import { InputHolder, TaskType, AddButton } from "./style";
+import { InputHolder, TaskType, AddButton, ActionHolder, Error } from "./style";
 
 function CreateCarTask({ modalStatus, toggleModal, createTask, loading }) {
   const [taskType, setTaskType] = useState(null);
+  const [error, setError] = useState(null);
   const addTask = e => {
     e.preventDefault();
     const { comment, taskType } = e.target;
-    if (!comment || !taskType) {
+
+    if (!comment || !comment.value || !taskType || !taskType.value) {
+      setError("Please fill required data");
       return;
     }
+    setError(null);
     createTask({ taskType: taskType.value, comment: comment.value });
   };
 
@@ -26,7 +31,9 @@ function CreateCarTask({ modalStatus, toggleModal, createTask, loading }) {
       <InputHolder onSubmit={addTask}>
         <h3>Create Task</h3>
         <label>
-          <TaskType>Task type</TaskType>
+          <TaskType>
+            Task type <Required />
+          </TaskType>
           <InputDropDown
             name="taskType"
             value={taskType}
@@ -36,13 +43,18 @@ function CreateCarTask({ modalStatus, toggleModal, createTask, loading }) {
           />
         </label>
         <label>
-          <TaskType>Task comment</TaskType>
+          <TaskType>
+            Task comment <Required />
+          </TaskType>
           <InputText
             name={"comment"}
             placeholder="Enter the comment for task"
           />
         </label>
-        <AddButton primary={loading}>Add</AddButton>
+        <ActionHolder>
+          <Error>{error}</Error>
+          <AddButton primary={loading}>Add</AddButton>
+        </ActionHolder>
       </InputHolder>
     </Modal>
   );

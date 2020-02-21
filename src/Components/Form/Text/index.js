@@ -3,6 +3,7 @@ import React, { useState } from "react";
 const InputText = ({
   defaultValue = "",
   onChange,
+  className,
   placeholder = "Enter your search",
   name
 }) => {
@@ -22,6 +23,7 @@ const InputText = ({
       placeholder={placeholder}
       value={inputValue}
       name={name}
+      className={className}
       type="text"
       onChange={onChangeHandler}
     />

@@ -50,6 +50,9 @@ export const InputHolder = styled.form`
       min-height: 28px;
       font-size: 16px;
       padding: 4px 8px;
+      border: 1px solid #eaeaea;
+      border-radius: 4px;
+      padding: 10px 10px;
     }
   }
 `;
@@ -58,9 +61,13 @@ export const TaskType = styled.h4`
   padding-bottom: 10px;
 `;
 
+export const ActionHolder = styled.div`
+  text-align: right;
+`;
+
 export const AddButton = styled.button`
   pointer-events: ${props => (props.primary ? "none" : "inherit")};
-  padding: 8px 22px;
+  padding: 12px 30px;
   cursor: pointer;
   border: 1px solid #eaeaea;
   border-radius: 5px;
@@ -69,3 +76,9 @@ export const AddButton = styled.button`
 `;
 
 export const TaskHolder = styled.div``;
+
+export const Error = styled.span`
+  color: red;
+  font-size: 13px;
+  margin-right: 8px;
+`;

@@ -11,7 +11,7 @@ import {
   fetchTrimValues
 } from "../../../Services/formOperation";
 
-import { Information, Button, FormLayout } from "./style";
+import { Information, Button } from "./style";
 
 function FinancialForm() {
   const dispatch = useDispatch();
