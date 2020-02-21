@@ -40,7 +40,7 @@ function CarInformation() {
       <ImageHolder>
         <img srcSet="/car_image.jpg" alt="car" />
       </ImageHolder>
-      <InformationHolder>
+      <InformationHolder styleId="carInfo">
         <h4>Status</h4>
         {carInfo.id && (
           <div data-testid="status-holder">
@@ -70,7 +70,10 @@ function CarInformation() {
       </InformationHolder>
 
       {/* Car Financial Information */}
-      <InformationHolder data-testid="dummy-purchase-location">
+      <InformationHolder
+        styleId="financialInfo"
+        data-testid="dummy-purchase-location"
+      >
         <h4>Financial Information</h4>
         <Information>
           <FinancialInformation

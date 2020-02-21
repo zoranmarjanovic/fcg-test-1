@@ -7,7 +7,7 @@ import Tasks from "./Tasks";
 
 import { fetchCarInfo } from "../../Store/Operations/carOperations";
 
-import { FormTaskLayer, FormLayout } from "./style";
+import { FormTaskLayer } from "./style";
 
 function Car() {
   const dispatch = useDispatch();
