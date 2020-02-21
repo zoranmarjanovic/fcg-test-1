@@ -7,7 +7,7 @@ function App() {
   return (
     <>
       {/* Include Error boundary later */}
-      <Header title={"FCG coding challenge"} />
+      <Header title={"Coding challenge"} />
       <Car />
     </>
   );

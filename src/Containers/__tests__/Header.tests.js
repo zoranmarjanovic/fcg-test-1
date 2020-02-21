@@ -5,6 +5,6 @@ import Header from "../../Components/Header/index";
 describe("<Header />", () => {
   test("renders learn react link", () => {
     const { queryByText } = render(<Header />);
-    expect(queryByText("FCG coding challenge")).toBeDefined();
+    expect(queryByText("Coding challenge")).toBeDefined();
   });
 });
