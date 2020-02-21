@@ -30,3 +30,7 @@ export const Button = styled.button`
     padding: 12px 30px;
   }
 `;
+
+export const ActionHolder = styled.div`
+  text-align: right;
+`;

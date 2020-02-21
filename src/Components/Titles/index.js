@@ -1,19 +1,19 @@
 import React from "react";
 import styled from "styled-components";
 
-const H3 = styled.h4`
+const H3 = styled.h3`
   font-size: 24px;
 `;
 
 const H4 = styled.h4`
-  font-size: 24px;
+  font-size: 18px;
   @media (max-width: 768px) {
     font-size: 22px;
   }
 `;
 
 const H5 = styled.h5`
-  font-size: 16px;
+  font-size: 14px;
 `;
 
 const H6 = styled.h6`

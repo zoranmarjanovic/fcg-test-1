@@ -13,7 +13,7 @@ import {
   fetchTrimValues
 } from "../../../Services/formOperation";
 
-import { Information, Button } from "./style";
+import { Information, Button, ActionHolder } from "./style";
 
 function FinancialForm() {
   const dispatch = useDispatch();
@@ -147,9 +147,11 @@ function FinancialForm() {
 
         {!formVisibility && <div>Loading Car Details, Please wait</div>}
         {formVisibility && (
-          <Button data-testid="submit-form" primary={carInfo.loading}>
-            {carInfo.loading ? "Processing" : "Submit"}
-          </Button>
+          <ActionHolder>
+            <Button data-testid="submit-form" primary={carInfo.loading}>
+              {carInfo.loading ? "Processing" : "Submit"}
+            </Button>
+          </ActionHolder>
         )}
       </FormLayout>
     </Paper>

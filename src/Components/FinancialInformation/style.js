@@ -11,5 +11,5 @@ export const Margin = styled.span`
 `;
 
 export const PriceInfo = styled.div`
-  margin-bottom: 14px;
+  margin-bottom: 4px;
 `;

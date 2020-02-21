@@ -1,9 +1,9 @@
 import styled from "styled-components";
 
-export const Layout = styled.form`
+export const Layout = styled.div`
   background: #fff;
   padding: 20px;
-  box-shadow: 2px 6px 7px rgba(0, 0, 0, 0.2);
+  box-shadow: 3px 3px 8px rgba(0, 0, 0, 0.1);
   border-radius: 4px;
   position: relative;
   & > ${"h4"} {
