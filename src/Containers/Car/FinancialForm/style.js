@@ -8,9 +8,8 @@ export const ImageHolder = styled.div`
 export const Information = styled.div`
   font-size: 14px;
   margin-bottom: 14px;
-  & > ${"h6"} {
-    font-size: 12px;
-    margin-bottom: 5px;
+  & > ${"h5"} {
+    margin-bottom: 10px;
   }
 `;
 

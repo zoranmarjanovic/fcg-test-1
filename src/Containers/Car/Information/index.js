@@ -2,6 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 import FinancialInformation from "../../../Components/FinancialInformation";
+import { TitleH4, TitleH5 } from "../../../Components/Titles";
 import InputDropDown from "../../../Components/Form/DropDown";
 import { updateCarData } from "../../../Store/Operations/carOperations";
 import { STATUS_DROP_DOWN, CAR_INFO_NAME_MAP } from "./constants";
@@ -41,7 +42,7 @@ function CarInformation() {
         <img srcSet="/car_image.jpg" alt="car" />
       </ImageHolder>
       <InformationHolder styleId="carInfo">
-        <h4>Status</h4>
+        <TitleH4 value={"Status"} />
         {carInfo.id && (
           <div data-testid="status-holder">
             {STATUS_DROP_DOWN.map(({ options, title, key }) => {
@@ -53,7 +54,7 @@ function CarInformation() {
                 : null;
               return (
                 <Information key={key}>
-                  <h6>{title}</h6>
+                  <TitleH5 value={title} />
                   <InputDropDown
                     id={key}
                     name={key}
@@ -74,7 +75,7 @@ function CarInformation() {
         styleId="financialInfo"
         data-testid="dummy-purchase-location"
       >
-        <h4>Financial Information</h4>
+        <TitleH4 value={"Financial Information"} />
         <Information>
           <FinancialInformation
             item={purchasePrice}

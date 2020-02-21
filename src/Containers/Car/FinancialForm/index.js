@@ -3,6 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import Paper from "../../../Components/PaperLayout";
 import InputDropDown from "../../../Components/Form/DropDown";
 import { FORM_DROP_DOWN } from "./contants";
+import { TitleH5 } from "../../../Components/Titles";
 
 import { updateCarData } from "../../../Store/Operations/carOperations";
 import {
@@ -115,7 +116,7 @@ function FinancialForm() {
   };
 
   return (
-    <Paper title={"A form to add information"} onSubmit={submitForm}>
+    <Paper title={"Update Information"} onSubmit={submitForm}>
       <div data-testid="financial-form-holder">
         {formVisibility &&
           FORM_DROP_DOWN.map(({ title, key, placeholder }) => {
@@ -128,7 +129,7 @@ function FinancialForm() {
               : null;
             return (
               <Information key={key}>
-                <h6>{title}</h6>
+                <TitleH5 value={title} />
                 <InputDropDown
                   onChange={formHandler}
                   id={key}

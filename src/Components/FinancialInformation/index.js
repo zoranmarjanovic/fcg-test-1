@@ -1,6 +1,7 @@
 import React from "react";
 import { DateTime } from "../DateTime";
 import { DateLocation, Margin, PriceInfo } from "./style";
+import { TitleH5 } from "../Titles";
 
 function FinancialInformation({
   item,
@@ -12,7 +13,7 @@ function FinancialInformation({
 }) {
   return (
     <>
-      <h6>{itemHead}</h6>
+      <TitleH5 value={itemHead} />
       {item && (
         <>
           <PriceInfo>

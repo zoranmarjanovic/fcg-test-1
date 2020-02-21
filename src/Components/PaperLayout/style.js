@@ -6,6 +6,9 @@ export const FormLayout = styled.form`
   box-shadow: 2px 6px 7px rgba(0, 0, 0, 0.2);
   border-radius: 4px;
   position: relative;
+  & > ${"h4"} {
+    margin-bottom: 20px;
+  }
 `;
 
 export const FormHeading = styled.h4`

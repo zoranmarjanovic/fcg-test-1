@@ -48,24 +48,14 @@ export const InformationHolder = styled.div`
   padding: 10px;
   min-width: 250px;
   & > ${"h4"} {
-    font-size: 16px;
-    margin-bottom: 12px;
-    border-bottom: 1px solid #eaeaea;
-    padding-bottom: 6px;
+    margin-bottom: 10px;
   }
   @media (max-width: 768px) {
     grid-area: ${props => props.styleId};
     padding: 12px 12px;
     min-width: 250px;
-    border: 1px solid #eaeaea;
-    box-shadow: 1px 1px 1px rgba(1, 1, 1, 0.4);
     box-shadow: 1px 1px 6px rgba(0, 0, 0, 0.1);
     border-radius: 4px;
-    & > ${"h4"} {
-      font-size: 24px;
-      border-bottom: 0;
-      margin-bottom: 0;
-    }
   }
   @media (max-width: 480px) {
     margin: ${ELEMENTS_SEPARATION_SPACE};
@@ -75,15 +65,13 @@ export const InformationHolder = styled.div`
 export const Information = styled.div`
   font-size: 14px;
   margin-bottom: 14px;
-
-  & > ${"h6"} {
+  & > ${"h5"} {
     font-size: 12px;
     margin-bottom: 5px;
   }
   @media (max-width: 768px) {
-    & > ${"h6"} {
+    & > ${"h5"} {
       font-size: 16px;
-      font-weight: bold;
       padding: 12px 0 0;
       margin-bottom: 10px;
     }
