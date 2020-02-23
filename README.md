@@ -1,16 +1,14 @@
 ## Notes
+
+### Agenda
 - This project helps vendors to update the car detail status and task thats scheduled while checkup
 - Checks how the data is been distributed across different views and efficient use of Store
-- 
-
 
 ### Important Note
 
 - CarID is store in a config file and is required in mutation and query file under graphQL. This is not a right approach. It has to come from UI as an input. Please ignore this config for now
 
 ### Application Setup
-
-#### To Start App
 - yarn install
 - yarn start 
 - open: http://localhost:3000/
@@ -57,7 +55,7 @@
 - I would always follow bottom to top approach testing pattern, where unit testing >  integration testing > UI testing. 
 
 ### Short coming of the designs
-- I believe  updating Status form and make form could have bought together under one form and user could update the information upon only on submit. This helps is number of API calls been called. Currently on every change of input the API is been called. 
+- I believe updating Status form and make form could have bought together under one form and user could update the information upon only on submit. This helps is number of API calls been called. Currently on every change of input the API is been called. 
 
 
 ### What I could have done more
@@ -65,7 +63,7 @@
 - Cleaning up the APP and validations
 - Introduction of Webpack to have more flexibility for performance
 - Optimization (React memoization to avoid re-render.)
-- Error Boundaries to sustain the APP even if the error exisit.
+- Error Boundaries to sustain the APP even if the error exist.
 - Better Git Commit
 - More test cases.
 - Better loader
